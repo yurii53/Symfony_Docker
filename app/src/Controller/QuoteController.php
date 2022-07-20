@@ -47,7 +47,6 @@ class QuoteController extends AbstractController {
 
         return $this->render(
             'quote/Hallo_time.php'
-            //'quote/Hallo_time.php'
         );
     }
 }
