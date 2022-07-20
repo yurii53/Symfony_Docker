@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\QuoteRepository;
-use App\Repository\DeathNoteRepository;
+use App\templates\DeathNoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ class QuoteController extends AbstractController {
     : Response {
 
         return $this->render(
-            'quote/index.html.twig',
+            'index.html.twig',
             [
                 'quotes' => $quoteRepository->findAll(),
                 'persons' => $noteRepository->findAll(),
@@ -25,19 +25,7 @@ class QuoteController extends AbstractController {
         );
     }
 
-    #[Route('/death', name: 'death')]
-    public function death(
-        DeathNoteRepository $noteRepository
-    )
-    : Response {
 
-        return $this->render(
-            'quote/index_death.html.twig',
-            [
-                'persons' => $noteRepository->findAll(),
-            ]
-        );
-    }
 
     #[Route('/task3', name: 'task3')]
     public function task(
