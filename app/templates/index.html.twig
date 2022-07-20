@@ -59,8 +59,8 @@
                     <td>{{ person.city_of_born}}</td>
                     <td>{{ person.dead_year}}</td>
                     <td>{{ person.city_of_dead}}</td>
-                    <td>{{ person.age}}</td>
-                    <td>{{ person.dead_N_years_ago}}</td>
+                    <td>{{ person.dead_year - person.born_year}}</td>
+                    <td>{{ person.now - person.dead_year}}</td>
                 </tr>
             {% endfor %}
             </tbody>

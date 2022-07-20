@@ -18,13 +18,13 @@ class DeathNote
     private ?string $Name = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $born_year = null;
+    private ?int $born_year = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $city_of_born = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $dead_year = null;
+    private ?int $dead_year = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $city_of_dead = null;
@@ -33,6 +33,7 @@ class DeathNote
 
     private ?string $dead_N_years_ago = null;
 
+    private ?int $now = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -50,14 +51,14 @@ class DeathNote
         return $this;
     }
 
-    public function getBorn_Year(): ?string
+    public function getBorn_Year(): ?int
     {
         return $this->born_year;
     }
 
     public function setBorn_Year(string $born_year): self
     {
-        $this->born_year = $born_year;
+        $this->born_year = (int)$born_year;
 
         return $this;
     }
@@ -74,16 +75,14 @@ class DeathNote
         return $this;
     }
 
-    public function getDead_Year(): ?string
+    public function getDead_Year(): ?int
     {
-        //if ($this->born_year > $this->dead_year)
-        //    $this->dead_year = $this->born_year;   це я потім дороблю
         return $this->dead_year;
     }
 
     public function setDead_Year(string $dead_year): self
     {
-        $this->dead_year = $dead_year;
+        $this->dead_year = (int)$dead_year;
 
         return $this;
     }
@@ -115,14 +114,21 @@ class DeathNote
         return $this->dead_N_years_ago;
     }
 
+    public function getNow(): ?int
+    {
+        $this->now = date('Y');
+        return $this->now;
+    }
+
     public function __construct($Name, $born_year, $city_of_born, $dead_year, $city_of_dead) {
         $this->Name = $Name;
         $this->city_of_born = $city_of_born;
         $this->city_of_dead = $city_of_dead;
-        $this->born_year = $born_year;
+        $this->born_year = (int)$born_year;
         if ($born_year > $dead_year)
-            $this->dead_year = $born_year;
+            $this->dead_year = (int)$born_year;
         else
-            $this->dead_year = $dead_year;
+            $this->dead_year = (int)$dead_year;
+        echo gettype($this->dead_year);
     }
 }
