@@ -132,6 +132,11 @@ class DeathNote
         return $this->now;
     }
 
+    public function CamelCase(string $str): ?string
+    {
+        return str_replace(['-','_',' '], '', ucwords($str, " -_\t\r\n\f\v'"));
+    }
+
     public function __construct(string $Name, int $born_year, string $city_of_born, int $dead_year, string $city_of_dead) {
         $this->Name         = $Name;
         $this->city_of_born = $city_of_born;
