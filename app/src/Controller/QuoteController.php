@@ -8,8 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+
 
 
 class QuoteController extends AbstractController {
@@ -20,7 +19,6 @@ class QuoteController extends AbstractController {
     )
     : Response
     {
-
         return $this->render(
             'index.html.twig',
             [
@@ -31,20 +29,13 @@ class QuoteController extends AbstractController {
     }
 
     #[Route('/api/quote/', name: 'index1')]
-    public function index1(SerializerInterface $serializer,
+    public function index1(
         QuoteRepository $quoteRepository,
         DeathNoteRepository $noteRepository
     ): JsonResponse
     {
 
-
-        //$a = $noteRepository->findAll();
-
-        $serializer->serialize([1,2,3], 'json', [
-            DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
-        ]);
-
-        return new JsonResponse($serializer);
+        return new JsonResponse(array($noteRepository->findAll(), $quoteRepository->findAll()));
     }
 
     #[Route('/task3', name: 'task3')]

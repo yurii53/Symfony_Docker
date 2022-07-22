@@ -12,28 +12,28 @@ class DeathNote
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Name = null;
+    public ?string $Name = null;
 
     #[ORM\Column(length: 5)]
-    private ?int $born_year = null;
+    public ?int $born_year = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $city_of_born = null;
+    public ?string $city_of_born = null;
 
     #[ORM\Column(length: 5)]
-    private ?int $dead_year = null;
+    public ?int $dead_year = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $city_of_dead = null;
+    public ?string $city_of_dead = null;
 
-    private ?int $age = null;
+    public ?int $age = null;
 
-    private ?int $dead_N_years_ago = null;
+    public ?int $dead_N_years_ago = null;
 
-    private ?int $now = null;
+    public ?int $now = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +108,15 @@ class DeathNote
         return $this->age;
     }
 
+    public function setAge(string $born_year, string $dead_year): self
+    {
+        if ($born_year > $dead_year)
+            $this->age = 0;
+        else
+            $this->age = (int)($dead_year - $born_year);
+
+        return $this;
+    }
     public function getDead_N_Years_ago(): ?int
     {
         $this->dead_N_years_ago = (int)date('Y') - $this->dead_year;
@@ -125,10 +134,15 @@ class DeathNote
         $this->city_of_born = $city_of_born;
         $this->city_of_dead = $city_of_dead;
         $this->born_year = (int)$born_year;
-        if ($born_year > $dead_year)
+        if ($born_year > $dead_year){
+            $this->age = 0;
             $this->dead_year = (int)$born_year;
-        else
+        }
+        else{
             $this->dead_year = (int)$dead_year;
+            $this->age = (int)($dead_year - $born_year);
+        }
+
 
     }
 }

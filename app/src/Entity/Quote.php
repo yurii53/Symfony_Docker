@@ -12,19 +12,19 @@ class Quote
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $quote = null;
+    public ?string $quote = null;
 
     #[ORM\Column(length: 25)]
-    private ?string $historian = null;
+    public ?string $historian = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $year = null;
+    public ?string $year = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $address = null;
+    public ?string $address = null;
 
     public function getId(): ?int
     {
