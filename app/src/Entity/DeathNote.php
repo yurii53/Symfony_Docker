@@ -29,10 +29,13 @@ class DeathNote
     #[ORM\Column(type: Types::TEXT)]
     public ?string $city_of_dead = null;
 
+    #[ORM\Column(length: 5)]
     public ?int $age = null;
 
+    #[ORM\Column(length: 5)]
     public ?int $dead_N_years_ago = null;
 
+    #[ORM\Column(length: 5)]
     public ?int $now = null;
     public function getId(): ?int
     {
@@ -56,9 +59,9 @@ class DeathNote
         return $this->born_year;
     }
 
-    public function setBorn_Year(string $born_year): self
+    public function setBorn_Year(int $born_year): self
     {
-        $this->born_year = (int)$born_year;
+        $this->born_year = $born_year;
 
         return $this;
     }
@@ -80,9 +83,9 @@ class DeathNote
         return $this->dead_year;
     }
 
-    public function setDead_Year(string $dead_year): self
+    public function setDead_Year(int $dead_year): self
     {
-        $this->dead_year = (int)$dead_year;
+        $this->dead_year = $dead_year;
 
         return $this;
     }
@@ -142,8 +145,7 @@ class DeathNote
             $this->dead_year = $dead_year;
             $this->age       = $dead_year - $born_year;
         }
-        var_dump($dead_year - $born_year);
-        var_dump($this->age);
-
+        $this->now = date('Y');
+        $this->dead_N_years_ago = $this->now - $this->dead_year;
     }
 }

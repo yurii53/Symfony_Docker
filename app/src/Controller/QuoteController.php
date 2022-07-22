@@ -34,8 +34,8 @@ class QuoteController extends AbstractController {
         DeathNoteRepository $noteRepository
     ): JsonResponse
     {
-        var_dump($noteRepository->findAll()[1]);
-        return new JsonResponse(/*array($noteRepository->findAll(), $quoteRepository->findAll())*/);
+        //var_dump($noteRepository->findAll()[1]);
+        return new JsonResponse(array($noteRepository->findAll(), $quoteRepository->findAll()));
     }
 
     #[Route('/task3', name: 'task3')]
