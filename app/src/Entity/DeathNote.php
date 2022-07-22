@@ -108,12 +108,12 @@ class DeathNote
         return $this->age;
     }
 
-    public function setAge(string $born_year, string $dead_year): self
+    public function setAge(int $born_year, int $dead_year): self
     {
         if ($born_year > $dead_year)
             $this->age = 0;
         else
-            $this->age = (int)($dead_year - $born_year);
+            $this->age = $dead_year - $born_year;
 
         return $this;
     }
@@ -129,20 +129,21 @@ class DeathNote
         return $this->now;
     }
 
-    public function __construct($Name, $born_year, $city_of_born, $dead_year, $city_of_dead) {
-        $this->Name = $Name;
+    public function __construct(string $Name, int $born_year, string $city_of_born, int $dead_year, string $city_of_dead) {
+        $this->Name         = $Name;
         $this->city_of_born = $city_of_born;
         $this->city_of_dead = $city_of_dead;
-        $this->born_year = (int)$born_year;
+        $this->born_year    = $born_year;
         if ($born_year > $dead_year){
-            $this->age = 0;
-            $this->dead_year = (int)$born_year;
+            $this->age       = 0;
+            $this->dead_year = $born_year;
         }
         else{
-            $this->dead_year = (int)$dead_year;
-            $this->age = (int)($dead_year - $born_year);
+            $this->dead_year = $dead_year;
+            $this->age       = $dead_year - $born_year;
         }
-
+        var_dump($dead_year - $born_year);
+        var_dump($this->age);
 
     }
 }
