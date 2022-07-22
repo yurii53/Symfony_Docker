@@ -1,4 +1,10 @@
+
 <?php
+
+use App\Repository\QuoteRepository;
+
+$a = new QuoteRepository();
+echo $a;
 $first_game = 1930;
 $start = 2000;
 $end = 2100;
@@ -8,5 +14,6 @@ while ($first_game < $end){
     }
     $first_game +=4;
 }
+
 
 

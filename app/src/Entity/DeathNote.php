@@ -29,9 +29,9 @@ class DeathNote
     #[ORM\Column(type: Types::TEXT)]
     private ?string $city_of_dead = null;
 
-    private ?string $age = null;
+    private ?int $age = null;
 
-    private ?string $dead_N_years_ago = null;
+    private ?int $dead_N_years_ago = null;
 
     private ?int $now = null;
     public function getId(): ?int
@@ -99,7 +99,7 @@ class DeathNote
         return $this;
     }
 
-    public function getAge(): ?string
+    public function getAge(): ?int
     {
         if ($this->born_year > $this->dead_year)
             $this->age = 0;
@@ -108,9 +108,9 @@ class DeathNote
         return $this->age;
     }
 
-    public function getDead_N_Years_ago(): ?string
+    public function getDead_N_Years_ago(): ?int
     {
-        $this->dead_N_years_ago = date('Y') - $this->dead_year;
+        $this->dead_N_years_ago = (int)date('Y') - $this->dead_year;
         return $this->dead_N_years_ago;
     }
 
@@ -129,6 +129,6 @@ class DeathNote
             $this->dead_year = (int)$born_year;
         else
             $this->dead_year = (int)$dead_year;
-        echo gettype($this->dead_year);
+
     }
 }

@@ -1,3 +1,0 @@
-<IfModule mod_suphp.c>
-AddHandler x-httpd-php5 .html .htm
-</IfModule>
