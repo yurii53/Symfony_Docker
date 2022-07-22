@@ -15,25 +15,25 @@ class DeathNote
     public ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    public ?string $Name = null;
+    public ?string $name = null;
 
     #[ORM\Column(length: 5)]
-    public ?int $born_year = null;
+    public ?int $bornYear = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    public ?string $city_of_born = null;
+    public ?string $cityOfBorn = null;
 
     #[ORM\Column(length: 5)]
-    public ?int $dead_year = null;
+    public ?int $deadYear = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    public ?string $city_of_dead = null;
+    public ?string $cityOfDead = null;
 
     #[ORM\Column(length: 5)]
     public ?int $age = null;
 
     #[ORM\Column(length: 5)]
-    public ?int $dead_N_years_ago = null;
+    public ?int $deadNYearsAgo = null;
 
     #[ORM\Column(length: 5)]
     public ?int $now = null;
@@ -44,70 +44,70 @@ class DeathNote
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getBorn_Year(): ?int
+    public function getBornYear(): ?int
     {
-        return $this->born_year;
+        return $this->bornYear;
     }
 
-    public function setBorn_Year(int $born_year): self
+    public function setBornYear(int $bornYear): self
     {
-        $this->born_year = $born_year;
+        $this->bornYear = $bornYear;
 
         return $this;
     }
 
-    public function getCity_Of_Born(): ?string
+    public function getCityOfBorn(): ?string
     {
-        return $this->city_of_born;
+        return $this->cityOfBorn;
     }
 
-    public function setCity_Of_Born(string $city_of_born): self
+    public function setCityOfBorn(string $cityOfBorn): self
     {
-        $this->city_of_born = $city_of_born;
+        $this->cityOfBorn = $cityOfBorn;
 
         return $this;
     }
 
-    public function getDead_Year(): ?int
+    public function getDeadYear(): ?int
     {
-        return $this->dead_year;
+        return $this->deadYear;
     }
 
-    public function setDead_Year(int $dead_year): self
+    public function setDeadYear(int $deadYear): self
     {
-        $this->dead_year = $dead_year;
+        $this->deadYear = $deadYear;
 
         return $this;
     }
 
-    public function getCity_Of_Dead(): ?string
+    public function getCityOfDead(): ?string
     {
-        return $this->city_of_dead;
+        return $this->cityOfDead;
     }
 
-    public function setCity_Of_Dead(string $city_of_dead): self
+    public function setCityOfDead(string $cityOfDead): self
     {
-        $this->city_of_dead = $city_of_dead;
+        $this->cityOfDead = $cityOfDead;
 
         return $this;
     }
 
     public function getAge(): ?int
     {
-        if ($this->born_year > $this->dead_year)
+        if ($this->bornYear > $this->deadYear)
             $this->age = 0;
         else
-            $this->age = $this->dead_year - $this->born_year;
+            $this->age = $this->deadYear - $this->bornYear;
         return $this->age;
     }
 
@@ -120,10 +120,10 @@ class DeathNote
 
         return $this;
     }
-    public function getDead_N_Years_ago(): ?int
+    public function getDeadNYearsAgo(): ?int
     {
-        $this->dead_N_years_ago = (int)date('Y') - $this->dead_year;
-        return $this->dead_N_years_ago;
+        $this->deadNYearsAgo = (int)date('Y') - $this->deadYear;
+        return $this->deadNYearsAgo;
     }
 
     public function getNow(): ?int
@@ -132,25 +132,22 @@ class DeathNote
         return $this->now;
     }
 
-    public function CamelCase(string $str): ?string
-    {
-        return str_replace(['-','_',' '], '', ucwords($str, " -_\t\r\n\f\v'"));
-    }
+    
 
     public function __construct(string $Name, int $born_year, string $city_of_born, int $dead_year, string $city_of_dead) {
-        $this->Name         = $Name;
-        $this->city_of_born = $city_of_born;
-        $this->city_of_dead = $city_of_dead;
-        $this->born_year    = $born_year;
+        $this->name         = $Name;
+        $this->cityOfBorn = $city_of_born;
+        $this->cityOfDead = $city_of_dead;
+        $this->bornYear    = $born_year;
         if ($born_year > $dead_year){
             $this->age       = 0;
-            $this->dead_year = $born_year;
+            $this->deadYear = $born_year;
         }
         else{
-            $this->dead_year = $dead_year;
+            $this->deadYear = $dead_year;
             $this->age       = $dead_year - $born_year;
         }
         $this->now = date('Y');
-        $this->dead_N_years_ago = $this->now - $this->dead_year;
+        $this->deadNYearsAgo = $this->now - $this->deadYear;
     }
 }

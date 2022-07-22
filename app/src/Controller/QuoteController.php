@@ -28,20 +28,6 @@ class QuoteController extends AbstractController {
         );
     }
 
-    static function CamelCase(string $str): string
-    {
-        return str_replace(['-', '_', ' ', '"', ',', '.', ':', '{', '}', '/', '\\'], '', ucwords($str, " \"-_\t\r\n\f\v'"));
-    }
-
-    public function ManyToCamel(array $arr): array
-    {
-        $camel_arr = [];
-        foreach($arr as $obj){
-            array_push($camel_arr, $this->CamelCase(json_encode($obj)));
-        }
-        return $camel_arr;
-    }
-
     #[Route('/api/quote/', name: 'index1')]
     public function index1(
         QuoteRepository $quoteRepository,
@@ -50,7 +36,7 @@ class QuoteController extends AbstractController {
     {
 
 
-        return new JsonResponse(array($this->ManyToCamel($noteRepository->findAll()), $this->ManyToCamel($quoteRepository->findAll())));
+        return new JsonResponse(array($noteRepository->findAll(), $quoteRepository->findAll());
     }
 
     #[Route('/task3', name: 'task3')]
