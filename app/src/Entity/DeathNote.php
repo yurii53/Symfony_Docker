@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DeathNoteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DeathNoteRepository::class)]
 class DeathNote
@@ -15,9 +16,11 @@ class DeathNote
     public ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['main'])]
     public ?string $name = null;
 
     #[ORM\Column(length: 5)]
+    #[Groups(['main'])]
     public ?int $bornYear = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -132,7 +135,7 @@ class DeathNote
         return $this->now;
     }
 
-    
+
 
     public function __construct(string $Name, int $born_year, string $city_of_born, int $dead_year, string $city_of_dead) {
         $this->name         = $Name;
